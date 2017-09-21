@@ -1,0 +1,26 @@
+{
+  "name": "easy-parking-backend",
+  "version": "0.0.1",
+  "description": "Backend for EasyParking, a intelligent parking lot management system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haruue/EasyParkingBackend.git"
+  },
+  "author": "Haruue Icymoon <i@haruue.moe>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/haruue/EasyParkingBackend/issues"
+  },
+  "homepage": "https://github.com/haruue/EasyParkingBackend#readme",
+  "dependencies": {
+    "@types/node": "^8.0.28",
+    "mongodb": "^2.2.31",
+    "@types/mongodb": "^2.2.11",
+    "express": "^4.15.4",
+    "@types/express": "^4.0.37"
+  }
+}
