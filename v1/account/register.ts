@@ -1,5 +1,5 @@
 import {Request, Response, Router} from "express";
-import {errorHandle} from "../../util/error-handler";
+import {APIErrorList, errorHandle} from "../../util/error-handler";
 import {checkPasswordStrength, hashPassword} from "../../util/password";
 import {mongo} from "../../util/database";
 import {Member} from "../../model/member";
@@ -10,16 +10,16 @@ export let router = Router();
 async function register(req: Request, res: Response) {
   let mobile = parseInt(req.body["mobile"]);
   if (!Number.isInteger(mobile)) {
-    errorHandle(null, 'mobile number malformed', 400, res);
+    errorHandle(res, 400, APIErrorList.mobileMalformed);
     return;
   }
   let password = req.body["password"];
   let passwordStrength = await checkPasswordStrength(password);
   if (!passwordStrength.result) {
-    if (!passwordStrength.message) {
-      throw new Error("You should provide reason message if password strength check error");
+    if (!passwordStrength.info) {
+      throw new Error("You should provide reason info if password strength check error");
     }
-    errorHandle(null, passwordStrength.message, 400 , res);
+    errorHandle(res, 400, passwordStrength.info);
     return;
   }
   let member = new Member();
@@ -29,16 +29,16 @@ async function register(req: Request, res: Response) {
     let db = await mongo();
     let old = await db.member.findOne({'mobile': mobile});
     if (old) {
-      errorHandle(null, 'mobile registered, try find password instead', 400, res);
+      errorHandle(res, 400, APIErrorList.mobileUsed);
       return;
     }
     let result = await db.member.insertOne(member);
     member._id = result.insertedId;
   } catch (err) {
-    errorHandle(err, 'unexpected error in database operation', 500, res);
+    errorHandle(res, 500, APIErrorList.unexpectedDatabaseError);
     return;
   }
-  successHandle('register success', member, res);
+  successHandle(res, {message: 'register success', data: member});
 }
 
 router.post('/', register);

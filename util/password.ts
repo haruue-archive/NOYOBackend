@@ -1,15 +1,19 @@
 import {compare, hash} from 'bcrypt';
+import {APIError, APIErrorList} from "./error-handler";
 
-export function checkPasswordStrength(password: string): Promise<{result: boolean, message?: string}> {
+export function checkPasswordStrength(password: string): Promise<{result: boolean, info?: APIError}> {
   return new Promise((resolve, reject) => {
     if (!password) {
-      resolve({result: false, message: 'password is empty'});
+      resolve({result: false, info: APIErrorList.passwordEmpty});
+      return;
     }
     if (password.length < 6) {
-      resolve({result: false, message: 'password is too short'});
+      resolve({result: false, info: APIErrorList.passwordTooShort});
+      return;
     }
     if (password.length > 32) {
-      resolve({result: false, message: 'password is too long'});
+      resolve({result: false, info: APIErrorList.passwordTooLong});
+      return;
     }
     let vote = 0;
     let regs = [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/];
@@ -19,7 +23,8 @@ export function checkPasswordStrength(password: string): Promise<{result: boolea
       }
     }
     if (vote < 3) {
-      resolve({result: false, message: `password is too weak. Password must include 3 of lower cases, upper cases, numeric and other symbols. But you only include ${vote}`});
+      resolve({result: false, info: APIErrorList[`passwordWeak-${vote}`]});
+      return;
     }
     resolve({result: true});
   });

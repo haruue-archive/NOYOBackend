@@ -1,5 +1,5 @@
 import {Request, Response, Router} from "express";
-import {errorHandle} from "../../util/error-handler";
+import {APIErrorList, errorHandle} from "../../util/error-handler";
 import {mongo} from "../../util/database";
 import {checkPassword} from "../../util/password";
 import {successHandle} from "../../util/success-handler";
@@ -11,13 +11,13 @@ async function login(req: Request, res: Response) {
   let username = req.body['username'];
   if (!username) {
     res.clearCookie('uid');
-    errorHandle(null, "username is empty", 400, res);
+    errorHandle(res, 400, APIErrorList.usernameEmpty);
     return;
   }
   let password = req.body["password"];
   if (!password) {
     res.clearCookie('uid');
-    errorHandle(null, "password is empty", 400, res);
+    errorHandle(res, 400, APIErrorList.passwordEmpty);
     return;
   }
   let persist = parseBoolean(req.body['persist']);
@@ -30,23 +30,27 @@ async function login(req: Request, res: Response) {
     ]});
     if (!result) {
       res.clearCookie('uid');
-      errorHandle(null, `account not exist`, 400, res);
+      errorHandle(res, 400, APIErrorList.accountNotExist);
       return;
     }
     if (!result.password) {
       res.clearCookie('uid');
-      errorHandle(`[info] password not exist for user ${result.username}`, 'account has been disabled', 400, res);
+      errorHandle(res, 400, APIErrorList.accountDisabled, `[info] password not exist for user ${result.username}`);
       return;
     }
     if (await checkPassword(password, result.password as string)) {
       let expires = persist ? new Date(Date.now() + 31536000000 /*365 days*/) : undefined;
       res.cookie('uid', result._id, {expires: expires, signed: true});
-      successHandle('login success', result, res);
+      successHandle(res, {message: 'login success', data: result});
+      return;
+    } else {
+      res.clearCookie('uid');
+      errorHandle(res, 400, APIErrorList.passwordError, `[info] password not exist for user ${result.username}`);
       return;
     }
   } catch (err) {
     res.clearCookie('uid');
-    errorHandle(err, 'unexpected error in database operation', 500, res);
+    errorHandle(res, 500, APIErrorList.unexpectedDatabaseError, err);
     return;
   }
 }
