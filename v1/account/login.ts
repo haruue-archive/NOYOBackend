@@ -45,7 +45,7 @@ async function login(req: Request, res: Response) {
       return;
     } else {
       res.clearCookie('uid');
-      errorHandle(res, 400, APIErrorList.passwordError, `[info] password not exist for user ${result.username}`);
+      errorHandle(res, 400, APIErrorList.passwordError);
       return;
     }
   } catch (err) {
