@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export class Token {
   _id?: any;
   random: string;
@@ -6,7 +9,12 @@ export class Token {
   /**
    * thing to validate
    */
-  what: string;
+  what: {
+    name: string;
+    userId: any;
+    extra?: any;
+    refId?: any;
+  };
 
   /**
    * milliseconds

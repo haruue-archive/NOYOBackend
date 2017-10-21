@@ -1,3 +1,8 @@
+/**
+ * User of this app
+ * <p>
+ * store as "member" collection in database
+ */
 export class Member {
   _id?: any;
   username?: string;
