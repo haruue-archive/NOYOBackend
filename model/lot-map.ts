@@ -26,10 +26,12 @@ export class LotMap {
   /**
    * the size of the map in px
    */
-  size: {
+  size?: {
     x: number;
     y: number;
-  }
+  };
+
+  imageUrl?: string;
 
   // TODO: find a way to draw the map
 
