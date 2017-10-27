@@ -4,7 +4,9 @@
   "description": "Backend for EasyParking, a intelligent parking lot management system.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "build": "tsc",
+    "start": "tsc; node out/index.js",
+    "test": "mocha out/test"
   },
   "repository": {
     "type": "git",

@@ -61,7 +61,7 @@ typings/
 .env
 
 # Auto generated js files
-*.js
+/out
 
 # config file
 /config.ts
