@@ -22,17 +22,17 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.0",
-    "mongodb": "^2.2.31"
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33"
   },
   "devDependencies": {
     "@types/bcrypt": "^1.0.0",
-    "@types/body-parser": "^1.16.5",
+    "@types/body-parser": "^1.16.7",
     "@types/cookie-parser": "^1.4.1",
-    "@types/express": "^4.0.37",
-    "@types/mongodb": "^2.2.11",
-    "@types/node": "^8.0.31",
-    "@types/mocha": "^2.2.43",
-    "mocha": "^4.0.0"
+    "@types/express": "^4.0.39",
+    "@types/mocha": "^2.2.44",
+    "@types/mongodb": "^2.2.15",
+    "@types/node": "^8.0.47",
+    "mocha": "^4.0.1"
   }
 }

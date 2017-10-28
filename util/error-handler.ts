@@ -35,4 +35,9 @@ export const APIErrorList = {
   "accountNotExist": {message: 'account is not exist', errno: 40002},
   "accountDisabled": {message: 'account is disabled', errno: 40003},
   "passwordError": {message: 'password is error', errno: 40004},
+  // 5. account global
+  "authorizationRequired": {message: 'Authorization Required', errno: 50000},
+  // 6. car
+  "carNumberEmpty": {message: 'car number is empty', errno: 60001},
+  'carNumberMalformed': {message: 'car number is malformed', errno: 60002},
 };
