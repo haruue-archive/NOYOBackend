@@ -5,6 +5,14 @@ import {mongo} from "../../util/database";
 import {Member} from "../../model/member";
 import {successHandle} from "../../util/success-handler";
 
+/**
+ * Register API
+ *
+ * @param mobile
+ * @param password
+ * @return {@link Member} if success
+ */
+
 export let router = Router();
 
 async function register(req: Request, res: Response) {

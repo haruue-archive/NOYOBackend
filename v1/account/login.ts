@@ -5,6 +5,15 @@ import {checkPassword} from "../../util/password";
 import {successHandle} from "../../util/success-handler";
 import {parseBoolean} from "../../util/request-utils";
 
+/**
+ * Login API
+ *
+ * @param username support username, mobile and email
+ * @param password
+ * @return {@link Member} and set signature uid cookie if success
+ */
+
+
 export let router = Router();
 
 async function login(req: Request, res: Response) {

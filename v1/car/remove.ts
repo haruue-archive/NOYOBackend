@@ -4,6 +4,13 @@ import {APIErrorList, errorHandle} from "../../util/error-handler";
 import {mongo} from "../../util/database";
 import {successHandle} from "../../util/success-handler";
 
+/**
+ * Remove car API
+ * @param carNum
+ * @param (in cookie) signatureCookie['uid']
+ * @return {@link Member} if success
+ */
+
 export let router = Router();
 
 async function remove(req: Request, res: Response) {
