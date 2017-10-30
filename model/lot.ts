@@ -13,13 +13,14 @@ export class Lot {
   image: string;
   address: string;
   phone: string;
+  mananerId: any;
 
   /**
    * real geographical coordinates for amap
    */
   location: {
-    longitude: number;
-    latitude: number;
+    lat: number;
+    lng: number;
   };
 
   spots: Array<Spot>;

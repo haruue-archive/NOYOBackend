@@ -40,4 +40,8 @@ export const APIErrorList = {
   // 6. car
   "carNumberEmpty": {message: 'car number is empty', errno: 60001},
   'carNumberMalformed': {message: 'car number is malformed', errno: 60002},
+  // 7. lot
+  "lotIdEmpty": {message: 'lot id is empty', errno: 70001},
+  "queryStringEmpty": {message: 'query string is empty', errno: 70002},
+  "queryRangeInfoLackOrEmpty": {message: 'please provide more parameter', errno: 70003},
 };

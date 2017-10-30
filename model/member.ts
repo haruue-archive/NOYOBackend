@@ -13,5 +13,6 @@ export class Member {
   mobile?: number;
   isMobileVerified?: boolean;
   city?: string;
-  cars?: Array<string>
+  cars?: Array<string>;
+  isLotManager: boolean;
 }
