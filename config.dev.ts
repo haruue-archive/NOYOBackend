@@ -3,3 +3,4 @@ export const listenPort = 22311;
 export const listenHost = '127.0.0.1';
 export const frontend = 'easyparking.caoyue.com.cn';
 export const cookieSignatureSecret = 'vqneD5yEd6DXPWt9';
+export const tokenSignatureSecret = 'adfdfkjk23kl4jl234';
