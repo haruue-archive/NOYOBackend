@@ -31,7 +31,7 @@ export class TokenGenerator {
    * @return {string}
    */
   private static signature(str: string, key: string): string {
-    return md5(`${str}#${key}`);
+    return parseInt(md5(`${str}#${key}`), 16).toString(36).substring(0, 8).toUpperCase();
   }
 
   private generateByTime(uid: any, op: string, time: number): string {
@@ -68,7 +68,7 @@ export class TokenGenerator {
         let sig = this.generateByTime(uid, op, time - i * this.timeSnip);
         possiblySig.push(sig);
       }
-      let result = token in possiblySig;
+      let result = token.toUpperCase() in possiblySig;
       resolve(result);
     });
   }
