@@ -2,6 +2,7 @@ import {Request, Response, Router} from "express";
 import {APIErrorList, errorHandle} from "../../util/error-handler";
 import {mongo} from "../../util/database";
 import {successHandle} from "../../util/success-handler";
+import {ObjectID} from "bson";
 
 /**
  * Get Lot information API
@@ -21,7 +22,7 @@ async function info(req: Request, res: Response) {
   }
   try {
     let db = await mongo();
-    let result = await db.lot.findOne({"_id": id});
+    let result = await db.lot.findOne({"_id": new ObjectID(id)});
     if (!result) {
       result = null;
     }

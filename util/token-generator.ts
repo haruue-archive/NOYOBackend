@@ -24,6 +24,14 @@ export class TokenGenerator {
     this.timeSnip = Math.ceil(expire / sigCount);
   }
 
+  static forSms(): TokenGenerator {
+    return new TokenGenerator(1000 * 60 * 15, 5);
+  }
+
+  static forEmail(): TokenGenerator {
+    return new TokenGenerator(1000 * 60 * 60, 5);
+  }
+
   /**
    * sign with key
    * @param {string} str
@@ -68,7 +76,7 @@ export class TokenGenerator {
         let sig = this.generateByTime(uid, op, time - i * this.timeSnip);
         possiblySig.push(sig);
       }
-      let result = token.toUpperCase() in possiblySig;
+      let result = possiblySig.indexOf(token.toUpperCase()) >= 0;
       resolve(result);
     });
   }

@@ -17,6 +17,9 @@ export let router = Router();
 
 async function info(req: Request, res: Response) {
   let member = await checkLoginUser(req, res);
+  if (!member) {
+    return;
+  }
   successHandle(res, {message: 'user info', data: member})
 }
 

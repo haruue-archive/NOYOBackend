@@ -9,9 +9,9 @@ export class Member {
   nickname?: string;
   password?: string;
   email?: string;
-  isEmailVerified?: boolean;
+  isEmailVerified: boolean = false;
   mobile?: number;
-  isMobileVerified?: boolean;
+  isMobileVerified: boolean = false;
   city?: string;
   cars?: Array<string>;
   isLotManager: boolean;

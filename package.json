@@ -4,9 +4,10 @@
   "description": "Backend for EasyParking, a intelligent parking lot management system.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "tsc; node out/index.js",
-    "test": "mocha out/test"
+    "build": "tsc; cp -a ./mail-template/res ./out/mail-template/",
+    "start": "npm run build; node out/index.js",
+    "test": "mocha out/test",
+    "clean": "rm -rf ./out/*"
   },
   "repository": {
     "type": "git",
@@ -19,22 +20,25 @@
   },
   "homepage": "https://github.com/haruue/EasyParkingBackend#readme",
   "dependencies": {
+    "async-file": "^2.0.2",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "md5": "^2.2.1",
-    "mongodb": "^2.2.33"
+    "mongodb": "^2.2.33",
+    "nodemailer": "^4.4.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^1.0.0",
-    "@types/body-parser": "^1.16.7",
+    "@types/body-parser": "^1.16.8",
     "@types/cookie-parser": "^1.4.1",
     "@types/express": "^4.0.39",
+    "@types/md5": "^2.1.32",
     "@types/mocha": "^2.2.44",
     "@types/mongodb": "^2.2.15",
-    "@types/node": "^8.0.47",
-    "@types/md5": "^2.1.32",
+    "@types/node": "^8.0.53",
+    "@types/nodemailer": "^4.3.1",
     "mocha": "^4.0.1"
   }
 }

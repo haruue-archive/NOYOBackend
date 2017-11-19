@@ -3,6 +3,7 @@ import {APIError, APIErrorList, errorHandle} from "./error-handler";
 import {Member} from "../model/member";
 import {Request, Response} from "express";
 import {mongo} from "./database";
+import {ObjectID} from "bson";
 
 export function checkPasswordStrength(password: string): Promise<{result: boolean, info?: APIError}> {
   return new Promise((resolve, reject) => {
@@ -47,7 +48,7 @@ export async function checkLoginUser(req: Request, res: Response): Promise<Membe
   if (uid) {
     try {
       let db = await mongo();
-      member = await db.member.findOne({'_id': uid});
+      member = await db.member.findOne({'_id': new ObjectID(uid)});
     } catch (e) {
       errorHandle(res, 500, APIErrorList.unexpectedDatabaseError, e);
       return null;
