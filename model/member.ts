@@ -5,14 +5,13 @@
  */
 export class Member {
   _id?: any;
-  username?: string;
-  nickname?: string;
-  password?: string;
-  email?: string;
+  username: string;
+  nickname: string;
+  password: string;
+  email: string;
   isEmailVerified: boolean = false;
   mobile?: number;
   isMobileVerified: boolean = false;
   city?: string;
-  cars?: Array<string>;
-  isLotManager: boolean;
+  role: "farmer" | "consumer";
 }

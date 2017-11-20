@@ -1,7 +1,7 @@
 {
-  "name": "easy-parking-backend",
+  "name": "noyo-backend",
   "version": "0.0.1",
-  "description": "Backend for EasyParking, a intelligent parking lot management system.",
+  "description": "Backend for NOYO.",
   "main": "index.js",
   "scripts": {
     "build": "tsc; cp -a ./mail-template/res ./out/mail-template/",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/haruue/EasyParkingBackend.git"
+    "url": "git+https://github.com/haruue/NOYOBackend.git"
   },
   "author": "Haruue Icymoon <i@haruue.moe>",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/haruue/EasyParkingBackend/issues"
+    "url": "https://github.com/haruue/NOYOBackend/issues"
   },
-  "homepage": "https://github.com/haruue/EasyParkingBackend#readme",
+  "homepage": "https://github.com/haruue/NOYOBackend#readme",
   "dependencies": {
     "async-file": "^2.0.2",
     "bcrypt": "^1.0.3",

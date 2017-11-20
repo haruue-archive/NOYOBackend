@@ -8,7 +8,7 @@ import {successHandle} from "../../util/success-handler";
 /**
  * Register API
  *
- * @param mobile
+ * @param email
  * @param password
  * @return {@link Member} if success
  */
@@ -16,9 +16,9 @@ import {successHandle} from "../../util/success-handler";
 export let router = Router();
 
 async function register(req: Request, res: Response) {
-  let mobile = parseInt(req.body["mobile"]);
-  if (!Number.isInteger(mobile)) {
-    errorHandle(res, 400, APIErrorList.mobileMalformed);
+  let email = req.body["email"];
+  if (!/^[1-9a-zA-Z+.]+@[1-9a-zA-Z+.]+\.[1-9a-zA-Z+.]+$/.test(email)) {
+    errorHandle(res, 400, APIErrorList.emailMalformed);
     return;
   }
   let password = req.body["password"];
@@ -31,13 +31,13 @@ async function register(req: Request, res: Response) {
     return;
   }
   let member = new Member();
-  member.mobile = mobile;
+  member.email = email;
   member.password = await hashPassword(password);
   try {
     let db = await mongo();
-    let old = await db.member.findOne({'mobile': mobile});
+    let old = await db.member.findOne({'email': email});
     if (old) {
-      errorHandle(res, 400, APIErrorList.mobileUsed);
+      errorHandle(res, 400, APIErrorList.emailUsed);
       return;
     }
     let result = await db.member.insertOne(member);
