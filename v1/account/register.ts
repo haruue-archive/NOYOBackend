@@ -36,7 +36,7 @@ async function register(req: Request, res: Response) {
     return;
   }
 
-  if (!/^[1-9a-zA-Z+.]+@[1-9a-zA-Z+.]+\.[1-9a-zA-Z+.]+$/.test(email)) {
+  if (!/^[1-9a-zA-Z+.]+@[1-9a-zA-Z.]+[1-9a-zA-Z]+\.[1-9a-zA-Z]+$/.test(email)) {
     errorHandle(res, 400, APIErrorList.emailMalformed);
     return;
   }
