@@ -14,4 +14,9 @@ export class Member {
   isMobileVerified: boolean = false;
   city?: string;
   role: "farmer" | "consumer";
+
+  static ROLE_FARMER = "farmer";
+  static ROLE_CONSUMER = "consumer";
+
+  static ROLES = [Member.ROLE_FARMER, Member.ROLE_CONSUMER];
 }

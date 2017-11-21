@@ -24,6 +24,8 @@ export const APIErrorList = {
   "mobileUsed": {message: 'mobile registered, try find password instead', errno: 10002},
   "emailMalformed": {message: 'email is malformed', errno: 10003},
   "emailUsed": {message: 'email registered, try find password instead', errno: 10004},
+  "roleNotExist": {message: 'role should be farmer or consumer', errno: 10005},
+  "usernameUsed": {message: 'username is used, please try another one', errno: 10006},
   // 2. password
   "passwordEmpty": {message: 'password is empty', errno: 20001},
   "passwordTooShort": {message: 'password is too short', errno: 20002},

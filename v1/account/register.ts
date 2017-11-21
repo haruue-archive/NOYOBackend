@@ -4,24 +4,43 @@ import {checkPasswordStrength, hashPassword} from "../../util/password";
 import {mongo} from "../../util/database";
 import {Member} from "../../model/member";
 import {successHandle} from "../../util/success-handler";
+import {Db} from "mongodb";
 
 /**
  * Register API
  *
  * @param email
+ * @param username
+ * @param nickname
  * @param password
+ * @param role
  * @return {@link Member} if success
  */
 
 export let router = Router();
 
 async function register(req: Request, res: Response) {
-  let email = req.body["email"];
+  let email = req.body.email;
+  let username = req.body.username;
+  let nickname = req.body.nickname;
+  let password = req.body.password;
+  let role = req.body.role;
+
+  if (!email || !username || !nickname || !password || !role) {
+    errorHandle(res, 400, APIErrorList.informationNotComplete);
+    return;
+  }
+
+  if (Member.ROLES.indexOf(role) < 0) {
+    errorHandle(res, 400, APIErrorList.roleNotExist);
+    return;
+  }
+
   if (!/^[1-9a-zA-Z+.]+@[1-9a-zA-Z+.]+\.[1-9a-zA-Z+.]+$/.test(email)) {
     errorHandle(res, 400, APIErrorList.emailMalformed);
     return;
   }
-  let password = req.body["password"];
+
   let passwordStrength = await checkPasswordStrength(password);
   if (!passwordStrength.result) {
     if (!passwordStrength.info) {
@@ -30,23 +49,36 @@ async function register(req: Request, res: Response) {
     errorHandle(res, 400, passwordStrength.info);
     return;
   }
+
   let member = new Member();
   member.email = email;
+  member.username = username;
+  member.nickname = nickname;
   member.password = await hashPassword(password);
+  member.role = role;
   try {
     let db = await mongo();
-    let old = await db.member.findOne({'email': email});
+
+    let old = await db.member.findOne({'username': username});
+    if (old) {
+      errorHandle(res, 400, APIErrorList.usernameUsed);
+      return;
+    }
+
+    old = await db.member.findOne({'email': email});
     if (old) {
       errorHandle(res, 400, APIErrorList.emailUsed);
       return;
     }
+
     let result = await db.member.insertOne(member);
     member._id = result.insertedId;
+    successHandle(res, {message: 'register success', data: member});
+    return;
   } catch (err) {
     errorHandle(res, 500, APIErrorList.unexpectedDatabaseError);
     return;
   }
-  successHandle(res, {message: 'register success', data: member});
 }
 
 router.post('/', register);
