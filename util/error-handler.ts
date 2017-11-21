@@ -55,11 +55,11 @@ export const APIErrorList = {
   "emailHasVerified": {message: 'your email has been verified, don\'t need to verified again.', errno: 50012},
   "mobileHasVerified": {message: 'your email has been verified, don\'t need to verified again.', errno: 50013},
   "unsupportedOpWithWhat": {message: 'this `op` don\'t support this `what`', errno: 50014},
-  // 6. car
-  "carNumberEmpty": {message: 'car number is empty', errno: 60001},
-  'carNumberMalformed': {message: 'car number is malformed', errno: 60002},
-  // 7. lot
-  "lotIdEmpty": {message: 'lot id is empty', errno: 70001},
-  "queryStringEmpty": {message: 'query string is empty', errno: 70002},
-  "queryRangeInfoLackOrEmpty": {message: 'please provide more parameter', errno: 70003},
+  // 8. goods
+  "errorType": {message: '`type` must be one of \'mud\' or \'product\'', errno: 80001},
+  "permissionDeniedModifyGoods": {message: 'only farmers can create goods', errno: 80002},
+  "noSuchGoods": {message: 'can not find such goods', errno: 80003},
+  "negativePrice": {message: 'price can not be a negative', errno: 80004},
+  "noSuchGoodsQueryField": {message: 'can\'t query by this', errno: 80005},
+  // 9. order
 };

@@ -1,6 +1,7 @@
 import {Collection, Db, MongoClient} from "mongodb";
 import {databaseUri} from "../config";
 import {Member} from "../model/member";
+import {Goods} from "../model/goods";
 
 let _db: Db;
 
@@ -22,10 +23,12 @@ class DB {
   constructor(db: Db) {
     this.db = db;
     this.member = db.collection("member");
+    this.goods = db.collection("goods");
   }
 
   db: Db;
   member: Collection<Member>;
+  goods: Collection<Goods>;
 }
 
 export async function mongo(): Promise<DB> {

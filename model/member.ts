@@ -3,8 +3,11 @@
  * <p>
  * store as "member" collection in database
  */
+import {ObjectID} from "bson";
+import {Goods} from "./goods";
+
 export class Member {
-  _id?: any;
+  _id?: ObjectID;
   username: string;
   nickname: string;
   password: string;
@@ -14,9 +17,13 @@ export class Member {
   isMobileVerified: boolean = false;
   city?: string;
   role: "farmer" | "consumer";
+  orders: Array<Goods> = [];
 
-  static ROLE_FARMER = "farmer";
-  static ROLE_CONSUMER = "consumer";
+  static RoleList = {
+    ROLE_FARMER: "farmer",
+    ROLE_CONSUMER: "consumer"
+  };
 
-  static ROLES = [Member.ROLE_FARMER, Member.ROLE_CONSUMER];
+
+  static ROLES = [Member.RoleList.ROLE_FARMER, Member.RoleList.ROLE_CONSUMER];
 }
