@@ -1,5 +1,5 @@
 import {Request, Response, Router} from "express";
-import {error, isUndefined} from "util";
+import {isUndefined} from "util";
 import {APIErrorList, errorHandle} from "../../util/error-handler";
 import {TokenGenerator} from "../../util/token-generator";
 import {successHandle} from "../../util/success-handler";
@@ -112,7 +112,6 @@ async function request(req: Request, res: Response) {
     text = text.replace(/%username/g, username).replace(/%uid/g, uid).replace(/%op/g, op).replace(/%token/g, token);
     let html = await template.html();
     html = html.replace(/%username/g, username).replace(/%uid/g, uid).replace(/%op/g, op).replace(/%token/g, token);
-    console.log(html);
     try {
       await sendMail({
         from: `${websiteName} <${mailAccount.auth.user}>`,
