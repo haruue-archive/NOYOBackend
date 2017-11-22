@@ -1,24 +1,18 @@
 import {ObjectID} from "bson";
 import {isUndefined} from "util";
+import {Order} from "./order";
 
 /**
- * A class refer to Goods and Orders
+ * A class refer to Goods
  */
 export class Goods {
   _id?: ObjectID;
-
-  /**
-   * unused in Goods
-   * represent the id of goods in Order
-   */
-  goodsId: ObjectID;
 
   title: string;
   summary: string;
 
   /**
    * in Goods: reminder of available goods
-   * in Order: count of goods that the consume buy
    */
   count: number;
   price: number;
@@ -35,24 +29,14 @@ export class Goods {
   seller: ObjectID;
 
   /**
-   * status value,
-   * represent status of a Order
-   * unused and always be {@link StatusList.STATUS_WAITING_PAY} in Goods
+   * refer to orders create by this goods
    */
-  status: 0|1|2|3|4|5|6|7 = 0;
+  orders: Array<Order> = [];
 
   /**
    * where it grow in Goods
-   * where it sent in Order
    */
   address: string;
-
-  /**
-   * external things
-   * only used in Order,
-   * always be empty in Goods
-   */
-  external: string = "";
 
   constructor(seller: ObjectID, title: string, summary: string, count: number, price: number, type: "product"|"mud", address: string, image?: string | undefined) {
     this.title = title;
@@ -65,38 +49,27 @@ export class Goods {
     this.address = address;
   }
 
-  createOrder(count: number, address: string, external: string): Goods {
-    let order = new Goods(this.seller, this.title, this.summary, count, this.price, this.type, address, this.image);
-    order._id = ObjectID.createFromTime(new Date().getTime() / 1000);
+  createOrder(buyer: ObjectID, count: number, address: string, external: string): Order {
     if (isUndefined(this._id)) {
       throw new Error("Storage it into db before create a order");
     }
-    order.goodsId = this._id;
-    order.external = external;
+    let order = new Order(
+      this._id,
+      this.title,
+      this.summary,
+      count,
+      this.price,
+      this.image,
+      this.type,
+      this.seller,
+      buyer,
+      0,
+      address,
+      external
+    );
+    this.orders.push(order);
     return order;
   }
-
-  static StatusList = {
-    STATUS_WAITING_PAY: 0,
-    STATUS_PAID: 1,
-    STATUS_WAITING_PLANT: 2,
-    STATUS_PLANTED: 3,
-    STATUS_WAITING_HARVEST: 4,
-    STATUS_HARVESTED: 5,
-    STATUS_TRANSPORT: 6,
-    STATUS_DELIVERED: 7
-  };
-
-  static STATUSES = [
-    Goods.StatusList.STATUS_WAITING_PAY,
-    Goods.StatusList.STATUS_PAID,
-    Goods.StatusList.STATUS_WAITING_PLANT,
-    Goods.StatusList.STATUS_PLANTED,
-    Goods.StatusList.STATUS_WAITING_HARVEST,
-    Goods.StatusList.STATUS_HARVESTED,
-    Goods.StatusList.STATUS_TRANSPORT,
-    Goods.StatusList.STATUS_DELIVERED
-  ];
 
   static TypeList = {
     TYPE_MUD: "mud",

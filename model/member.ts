@@ -4,7 +4,7 @@
  * store as "member" collection in database
  */
 import {ObjectID} from "bson";
-import {Goods} from "./goods";
+import {Order} from "./order";
 
 export class Member {
   _id?: ObjectID;
@@ -17,7 +17,7 @@ export class Member {
   isMobileVerified: boolean = false;
   city?: string;
   role: "farmer" | "consumer";
-  orders: Array<Goods> = [];
+  orders: Array<Order> = [];
 
   static RoleList = {
     ROLE_FARMER: "farmer",
