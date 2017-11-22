@@ -47,6 +47,11 @@ async function create(req: Request, res: Response) {
     return;
   }
 
+  if (count < 0 || price < 0) {
+    errorHandle(res, 400, APIErrorList.negativeValue);
+    return;
+  }
+
   if (Goods.TYPES.indexOf(type) < 0) {
     errorHandle(res, 400, APIErrorList.errorType);
     return;

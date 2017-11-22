@@ -57,9 +57,12 @@ export const APIErrorList = {
   "unsupportedOpWithWhat": {message: 'this `op` don\'t support this `what`', errno: 50014},
   // 8. goods
   "errorType": {message: '`type` must be one of \'mud\' or \'product\'', errno: 80001},
-  "permissionDeniedModifyGoods": {message: 'only farmers can create goods', errno: 80002},
+  "permissionDeniedModifyGoods": {message: 'only farmers can operate goods', errno: 80002},
   "noSuchGoods": {message: 'can not find such goods', errno: 80003},
-  "negativePrice": {message: 'price can not be a negative', errno: 80004},
+  "negativeValue": {message: 'value can not be a negative', errno: 80004},
   "noSuchGoodsQueryField": {message: 'can\'t query by this', errno: 80005},
   // 9. order
+  "permissionDeniedModifyOrder": {message: 'only consumer can operate order', errno: 90000},
+  "noSuchOrder": {message: 'no such order', errno: 90001},
+  "errorOrderStatus": {message: 'only order in STATUS_WAITING_PAY or STATUS_PAID can be cancel', errno: 90002},
 };

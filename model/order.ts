@@ -1,7 +1,7 @@
 import {ObjectID} from "bson";
 
 export class Order {
-  _id?: ObjectID;
+  _id: ObjectID;
 
   /**
    * represent the id of goods in Order
@@ -37,7 +37,7 @@ export class Order {
    * status value,
    * represent status of a Order
    */
-  status: 0|1|2|3|4|5|6|7 = 0;
+  status: 0|1|2|3|4|5|6|7|-1 = 0;
 
   /**
    * where it sent in Order
@@ -75,7 +75,8 @@ export class Order {
     STATUS_WAITING_HARVEST: 4,
     STATUS_HARVESTED: 5,
     STATUS_TRANSPORT: 6,
-    STATUS_DELIVERED: 7
+    STATUS_DELIVERED: 7,
+    STATUS_CANCELLED: -1
   };
 
   static STATUSES = [
@@ -86,7 +87,8 @@ export class Order {
     Order.StatusList.STATUS_WAITING_HARVEST,
     Order.StatusList.STATUS_HARVESTED,
     Order.StatusList.STATUS_TRANSPORT,
-    Order.StatusList.STATUS_DELIVERED
+    Order.StatusList.STATUS_DELIVERED,
+    Order.StatusList.STATUS_CANCELLED
   ];
 
 
