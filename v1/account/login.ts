@@ -10,6 +10,7 @@ import {parseBoolean} from "../../util/request-utils";
  *
  * @param username support username, mobile and email
  * @param password
+ * @param persist 'remember me?'
  * @return {@link Member} and set signature uid cookie if success
  */
 
