@@ -68,7 +68,7 @@ async function update(req: Request, res: Response) {
       errorHandle(res, 400, strength.info);
       return;
     }
-    if (!checkPassword(old, member.password)) {
+    if (!await checkPassword(old, member.password)) {
       errorHandle(res, 400, APIErrorList.passwordError);
       return;
     }
