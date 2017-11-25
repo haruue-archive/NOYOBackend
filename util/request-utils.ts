@@ -21,6 +21,10 @@ export function parseBoolean(origin: any | null | undefined, defaultValue: boole
   return value;
 }
 
-export function isEmailValidate(email: string) {
+export function isEmailValidate(email: string): boolean {
   return /^[1-9a-zA-Z+.]+@[1-9a-zA-Z.]*[1-9a-zA-Z]+\.[1-9a-zA-Z]+$/.test(email);
+}
+
+export function isUsernameValidate(username: string): boolean {
+  return /^[a-zA-Z_][a-zA-Z0-9_]{4,}$/.test(username);
 }

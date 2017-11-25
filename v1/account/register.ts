@@ -5,7 +5,7 @@ import {mongo} from "../../util/database";
 import {Member} from "../../model/member";
 import {successHandle} from "../../util/success-handler";
 import {Db} from "mongodb";
-import {isEmailValidate} from "../../util/request-utils";
+import {isEmailValidate, isUsernameValidate} from "../../util/request-utils";
 
 /**
  * Register API
@@ -42,7 +42,7 @@ async function register(req: Request, res: Response) {
     return;
   }
 
-  if (!/^[a-zA-Z_][a-zA-Z0-9_]{4,}$/.test(username)) {
+  if (!isUsernameValidate(username)) {
     errorHandle(res, 400, APIErrorList.usernameMalformed);
     return;
   }
