@@ -8,4 +8,4 @@ async function logout(req: Request, res: Response) {
   successHandle(res, {message: 'logout'});
 }
 
-router.post('/', router);
+router.post('/', logout);
