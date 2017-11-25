@@ -20,3 +20,7 @@ export function parseBoolean(origin: any | null | undefined, defaultValue: boole
   }
   return value;
 }
+
+export function isEmailValidate(email: string) {
+  return /^[1-9a-zA-Z+.]+@[1-9a-zA-Z.]*[1-9a-zA-Z]+\.[1-9a-zA-Z]+$/.test(email);
+}

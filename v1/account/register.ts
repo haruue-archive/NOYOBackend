@@ -5,6 +5,7 @@ import {mongo} from "../../util/database";
 import {Member} from "../../model/member";
 import {successHandle} from "../../util/success-handler";
 import {Db} from "mongodb";
+import {isEmailValidate} from "../../util/request-utils";
 
 /**
  * Register API
@@ -36,7 +37,7 @@ async function register(req: Request, res: Response) {
     return;
   }
 
-  if (!/^[1-9a-zA-Z+.]+@[1-9a-zA-Z.]+[1-9a-zA-Z]+\.[1-9a-zA-Z]+$/.test(email)) {
+  if (!isEmailValidate(email)) {
     errorHandle(res, 400, APIErrorList.emailMalformed);
     return;
   }

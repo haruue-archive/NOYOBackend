@@ -6,6 +6,7 @@ import {
   hashPassword
 } from "../../util/password";
 import {successHandle} from "../../util/success-handler";
+import {isEmailValidate} from "../../util/request-utils";
 
 /**
  * update account info
@@ -46,6 +47,11 @@ async function update(req: Request, res: Response) {
 
   if (["email", "password", "city"].indexOf(what) >= 0 && !value) {
     errorHandle(res, 400, APIErrorList.informationNotComplete);
+    return;
+  }
+
+  if (what == "email" && !isEmailValidate(value)) {
+    errorHandle(res, 400, APIErrorList.emailMalformed);
     return;
   }
 
