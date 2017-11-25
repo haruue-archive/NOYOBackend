@@ -80,6 +80,14 @@ async function update(req: Request, res: Response) {
     let db = await mongo();
     member[what] = value;
 
+    if (what == "email") {
+      let old = await db.member.findOne({'email': value});
+      if (old) {
+        errorHandle(res, 400, APIErrorList.emailUsed)
+        return;
+      }
+    }
+
     let result = await db.member.updateOne({'_id': member._id}, member);
     successHandle(res, {message: 'update success', data: member});
     return;
