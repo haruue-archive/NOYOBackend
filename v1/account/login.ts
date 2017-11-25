@@ -34,7 +34,7 @@ async function login(req: Request, res: Response) {
   try {
     let db = await mongo();
     let result = await db.member.findOne({'$or': [
-      {'username': username},
+      {'username': new RegExp(`^${username}$`, 'i')},
       {'mobile':parseInt(username)},
       {'email':username}
     ]});

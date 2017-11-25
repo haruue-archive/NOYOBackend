@@ -41,6 +41,11 @@ async function register(req: Request, res: Response) {
     return;
   }
 
+  if (!/^[a-zA-Z_][a-zA-Z0-9_]{4,}$/.test(username)) {
+    errorHandle(res, 400, APIErrorList.usernameMalformed);
+    return;
+  }
+
   let passwordStrength = await checkPasswordStrength(password);
   if (!passwordStrength.result) {
     if (!passwordStrength.info) {
@@ -59,7 +64,7 @@ async function register(req: Request, res: Response) {
   try {
     let db = await mongo();
 
-    let old = await db.member.findOne({'username': username});
+    let old = await db.member.findOne({'username': new RegExp(`^${username}$`, 'i')});
     if (old) {
       errorHandle(res, 400, APIErrorList.usernameUsed);
       return;
