@@ -22,7 +22,7 @@ import {successHandle} from "../../util/success-handler";
  * only farmer who created the goods can remove it
  */
 
-let router = Router();
+export let router = Router();
 
 async function update(req: Request, res: Response) {
   let what = req.params.what;
