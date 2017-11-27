@@ -16,7 +16,13 @@ import {APIErrorList, errorHandle} from "../../util/error-handler";
 export let router = Router();
 
 async function list(req: Request, res: Response) {
-  let type = req.body.mud;
+  let type = req.body.type;
+
+  if (!type) {
+    errorHandle(res, 400, APIErrorList.informationNotComplete);
+    return;
+  }
+
   try {
     let db = await mongo();
     let list: Array<Goods> = [];
