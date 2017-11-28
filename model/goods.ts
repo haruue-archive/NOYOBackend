@@ -49,28 +49,6 @@ export class Goods {
     this.address = address;
   }
 
-  createOrder(buyer: ObjectID, count: number, address: string, external: string): Order {
-    if (isUndefined(this._id)) {
-      throw new Error("Storage it into db before create a order");
-    }
-    let order = new Order(
-      this._id,
-      this.title,
-      this.summary,
-      count,
-      this.price,
-      this.image,
-      this.type,
-      this.seller,
-      buyer,
-      0,
-      address,
-      external
-    );
-    this.orders.push(order);
-    return order;
-  }
-
   static TypeList = {
     TYPE_MUD: "mud",
     TYPE_PRODUCT: "product"

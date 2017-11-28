@@ -1,4 +1,6 @@
 import {ObjectID} from "bson";
+import {Goods} from "./goods";
+import {isUndefined} from "util";
 
 export class Order {
   _id: ObjectID;
@@ -65,6 +67,28 @@ export class Order {
     this.status = status;
     this.address = address;
     this.external = external;
+  }
+
+  static fromGoods(goods: Goods, buyer: ObjectID, count: number, address: string, external: string) {
+    if (isUndefined(goods._id)) {
+      throw new Error("Storage it into db before create a order");
+    }
+    let order = new Order(
+      goods._id,
+      goods.title,
+      goods.summary,
+      count,
+      goods.price,
+      goods.image,
+      goods.type,
+      goods.seller,
+      buyer,
+      0,
+      address,
+      external
+    );
+    goods.orders.push(order);
+    return order;
   }
 
   static StatusList = {

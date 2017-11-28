@@ -5,6 +5,7 @@ import {APIErrorList, errorHandle} from "../../util/error-handler";
 import {mongo} from "../../util/database";
 import {ObjectID} from "bson";
 import {successHandle} from "../../util/success-handler";
+import {Order} from "../../model/order";
 
 /**
  * create a order
@@ -57,7 +58,7 @@ async function create(req: Request, res: Response) {
       errorHandle(res, 400, APIErrorList.noSuchGoods);
       return;
     }
-    let order = goods.createOrder(member._id as ObjectID, count, address, external);
+    let order = Order.fromGoods(goods, member._id as ObjectID, count, address, external);
     member.orders.push(order);
     let result1 = await db.member.updateOne({'_id': member._id}, member);
     let result2 = await db.goods.updateOne({'_id': goods._id}, goods);
