@@ -55,6 +55,7 @@ export class Order {
 
 
   constructor(goodsId: ObjectID, title: string, summary: string, count: number, price: number, image: string | undefined, type, seller: ObjectID, buyer: ObjectID, status: any | any | any | any | any | any | any | any, address: string, external: string) {
+    this._id = new ObjectID();
     this.goodsId = goodsId;
     this.title = title;
     this.summary = summary;
