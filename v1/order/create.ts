@@ -65,7 +65,7 @@ async function create(req: Request, res: Response) {
     successHandle(res, {message: 'order created', data: order});
     return;
   } catch (e) {
-    errorHandle(res, 500, APIErrorList.unexpectedDatabaseError);
+    errorHandle(res, 500, APIErrorList.unexpectedDatabaseError, e);
     return;
   }
 
