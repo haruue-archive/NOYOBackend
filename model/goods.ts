@@ -42,7 +42,7 @@ export class Goods {
     this.title = title;
     this.summary = summary;
     this.count = Math.floor(count);
-    this.price = Math.floor(price * 100) / 100 * this.count;
+    this.price = Math.floor(price * 100) / 100;
     this.type = type;
     this.image = image;
     this.seller = seller;

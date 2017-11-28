@@ -59,8 +59,8 @@ export class Order {
     this.goodsId = goodsId;
     this.title = title;
     this.summary = summary;
-    this.count = count;
-    this.price = price;
+    this.count = Math.floor(count);
+    this.price = Math.floor(price * 100) / 100 * this.count;
     this.image = image;
     this.type = type;
     this.seller = seller;
